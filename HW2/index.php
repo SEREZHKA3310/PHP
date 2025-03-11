@@ -16,16 +16,15 @@
         <form action="https://httpbin.org/post" method="POST">
           <label>Текст<input type="text" name="name"></label><br>
           <label>Почта<input type="email" name="email"></label><br>
-          <label>Тип обращения
-            <select>
-              <option>Жалоба</option>
-              <option>Предложение</option>
-              <option>Благодарность</option>
+          <span>Тип обращения</span>
+            <select name="type">
+              <option value="report">Жалоба</option>
+              <option value="offer">Предложение</option>
+              <option value="gratefulness">Благодарность</option>
             </select>
           <label>Вариант ответа
             <input type="checkbox" name="letter" value="sms">
             <input type="checkbox" name="letter" value="e-mail">
-          </label>
           </label>
           <button type="submit">отправить</button>
         </form>
