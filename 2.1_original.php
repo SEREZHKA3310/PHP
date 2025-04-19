@@ -45,7 +45,7 @@ $daysOfWeek = [
 
 $currentDayNumber = date('N');
 
-echo "Сегодня: " . $daysOfWeek[$currentDayNumber];
+echo "Сегодня: " . $daysOfWeek[$currentDayNumber] . "<br>";
 
 
 
@@ -53,8 +53,8 @@ echo "Сегодня: " . $daysOfWeek[$currentDayNumber];
 
 $progLang = ['html', 'css', 'php', 'js', 'jq'];
 
-foreach($progLang as $index => $lang) {
-  echo $index . "<br>";
+foreach($progLang as $lang) {
+  echo $lang . "<br>";
 }
 
 ?>
