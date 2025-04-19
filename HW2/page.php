@@ -20,6 +20,5 @@
     <footer>
     <a href="index.php">Перейти на предыдущую страницу</a>
     </footer>
-    
   </body>
 </html>
