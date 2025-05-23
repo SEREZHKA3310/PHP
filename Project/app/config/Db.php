@@ -30,7 +30,7 @@ class Db{
 
 public function query($sql, $params = [], $className='stdClass')
     {
-        isset($params[0]) ? $params_edit = $params : $params_edit = null;//by timqwees
+        isset($params[0]) ? $params_edit = $params : $params_edit = null;
         $sth = $this->connect->prepare($sql);
         $sth->execute($params_edit);
          return $sth->fetchAll(PDO::FETCH_CLASS, $className);
