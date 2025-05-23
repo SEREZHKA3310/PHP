@@ -1,18 +1,13 @@
 <?php
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/trigonometric.php';
-
 function isValid($expr) {
-    return preg_match('/^[0-9+\-*\/(). a-zA-Z]+$/', $expr);
+    return preg_match('/^[0-9+\-*\/(). ]+$/', $expr);
 }
 
 function calc($expr) {
     $expr = str_replace(' ', '', $expr);
     if (!isValid($expr)) throw new Exception('Недопустимые символы');
-    if (preg_match('/(sin|cos|tan|ctg|cot)\(/i', $expr)) {
-        return evaluateTrigonometricExpression($expr);
-    }
     $brackets = 0;
     for ($i = 0; $i < strlen($expr); $i++) {
         if ($expr[$i] == '(') $brackets++;

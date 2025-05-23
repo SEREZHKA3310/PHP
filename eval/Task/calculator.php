@@ -50,24 +50,28 @@
 </head>
 <body>
 <div class="calc-container">
-    <input type="text" id="display" class="calc-display" value="0">
+    <input type="text" id="display" class="calc-display" value="0" readonly>
     <div class="calc-buttons">
         <button class="calc-btn c" onclick="clearDisplay()">C</button>
         <button class="calc-btn" onclick="backspace()">⌫</button>
         <button class="calc-btn op" onclick="appendToDisplay('(')">(</button>
         <button class="calc-btn op" onclick="appendToDisplay(')')">)</button>
+
         <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
         <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
         <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
         <button class="calc-btn op" onclick="appendToDisplay('/')">/</button>
+
         <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
         <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
         <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
         <button class="calc-btn op" onclick="appendToDisplay('*')">*</button>
+
         <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
         <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
         <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
         <button class="calc-btn op" onclick="appendToDisplay('-')">-</button>
+
         <button class="calc-btn" onclick="appendToDisplay('0')">0</button>
         <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
         <button class="calc-btn eq" onclick="calculate()">=</button>
