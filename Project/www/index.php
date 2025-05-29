@@ -20,14 +20,3 @@ spl_autoload_register(function(string $className){
     if (!$findRoute) echo 'Страница не найдена';
 
 
-    // $controller = new app\Controllers\MainController;
-    // if (isset($_GET['name'])) $controller->sayHello($_GET['name']);
-    // else $controller->main();
-
-    
-    // $user = new \app\Models\Users\User('Ivan');
-    // $article = new \app\Models\Articles\Article('title', 'text', $user);
-    // echo $article->getAuthor()->getName();
-
-
-

@@ -10,7 +10,7 @@ class Db{
     private static $instance;
 
     private const DB_HOST = 'localhost';
-    private const DB_PORT = '8080';
+    private const DB_PORT = '3307';
     private const DB_USERNAME = 'root';
     private const DB_PASSWORD = '';
     private const DB_NAME = 'project';
@@ -28,11 +28,13 @@ class Db{
         else return self::$instance;
     }
 
-public function query($sql, $params = [], $className='stdClass')
+    public function query($sql, $params = [], $className='stdClass')
     {
-        isset($params[0]) ? $params_edit = $params : $params_edit = null;
         $sth = $this->connect->prepare($sql);
-        $sth->execute($params_edit);
-         return $sth->fetchAll(PDO::FETCH_CLASS, $className);
+        $result = $sth->execute($params);
+        if (!$result) {
+            return null;
+        }
+        return $sth->fetchAll(PDO::FETCH_CLASS, $className);
     }
 }

@@ -3,6 +3,7 @@
 namespace app\Controllers;
 use app\View\View;
 use app\Models\Articles\Article;
+use app\Models\Comments\Comment;
 use app\config\Db;
 
 class ArticleController extends Article
@@ -22,12 +23,13 @@ class ArticleController extends Article
 
     public function show($id){
         $article = Article::getById($id);
+        $comment = Comment::getByFildName('article_id', $article->getId());
             if ($article == []) 
         {
             $this->view->renderHtml('error/404', [], 404);
             return;
         }
-        $this->view->renderHtml('article/show', ['article'=>$article]);
+        $this->view->renderHtml('article/show', ['article'=>$article, 'comments'=>$comment]);
     }
 
     public function edit($id){
@@ -35,12 +37,13 @@ class ArticleController extends Article
         $this->view->renderHtml('article/edit', ['article'=>$article]);
     }
 
+
     public function update($id){
         $article = Article::getById($id);
         $article->title = $_POST['title'];
         $article->text = $_POST['text'];
         $article->save();
-        return header('Location:http://localhost/student-241/321/Project/www/article/'.$article->getId());
+        return header('Location: /Project/www/article/' . $article->getId());
     }
 
     public function create(){
@@ -53,78 +56,26 @@ class ArticleController extends Article
         $article->text = $_POST['text'];
         $article->authorId = 1;
         $article->save();
-        return header('Location:http://localhost/student-241/321/Project/www/index.php');
+        return header('Location:http://localhost/Project/www/index.php');
     }
 
-    public function delete(int $id, $tablename){
+    public function delete(int $id, $tablename = 'articles'){
         $article = Article::getById($id);
-        $article->delete();
-        return header('Location:http://localhost/student-241/321/Project/www/index.php');
+        $comments = Comment::getByFildName('article_id', $id);
+        foreach ($comments as $comment) {
+            $comment->delete($comment->getId(), 'comments');
+        }
+        $article->delete($id, $tablename);
+        return header('Location:http://localhost/Project/www/index.php');
     }
 
-public function addArticle()
-{
-    // Получаем данные (в вашем примере они захардкожены)
-    $title = 2;
-    $date = 3;
-    $text = 2;
-    $author = 5;
-    
-    // Получаем соединение с БД
-    $db = Db::getInstance();
-    
-    try {
-        // Подготавливаем SQL-запрос
-        $sql = 'INSERT INTO '.static::getTableName().' 
-                (`title`, `text`, `author`, `data`, `id`) 
-                VALUES (1,1,1,1,1)';
-        
-        // Выполняем запрос с именованными параметрами
-        $result = $db->query(
-            $sql,
-            null,
-            static::class
-        );
 
-            $this->view->renderHtml('article/create');
-        
-    } catch (\PDOException $e) {
-        // Логируем ошибку
-        error_log('Error adding article: ' . $e->getMessage());
-        return false;
+    public function setAuthorId(string $authorId) {
+        $this->authorId = $authorId;
     }
-}
 
-    /**
-     * @param int $id
-     * @param int $userId
-     * 
-     * @return [type]
-     */
-    // public function removeArticle(int $id, int $userId)
-    // {
-    //     try {
-    //         $this->verifyTable;
-
-    //         self::$db->beginTransaction();
-
-    //         $stmt = $this->network->QuaryRequest__Article['removeArticle'];
-    //         $result = $stmt->execute([$id, $userId]);
-
-    //         if ($result) {
-    //             self::$db->commit();
-    //             return true;
-    //         }
-
-    //         self::$db->rollBack();
-    //         return false;
-    //     } catch (\PDOException $e) {
-    //         if (self::$db->inTransaction()) {
-    //             self::$db->rollBack();
-    //         }
-    //         error_log("Ошибка при удалении статьи: " . $e->getMessage());
-    //         return false;
-    //     }
-    // }
+    public function setArticleId(string $articleId) {
+        $this->articleId = $articleId;
+    }
 
 }

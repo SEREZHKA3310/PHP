@@ -1,4 +1,19 @@
 <?php require(dirname(__DIR__).'/header.php');?>
+
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= $_SESSION['error']; ?>
+        <?php unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success" role="alert">
+        <?= $_SESSION['success']; ?>
+        <?php unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
+
 <form action="<?=dirname($_SERVER['SCRIPT_NAME'])?>/article/<?=$article->getId();?>/update" method="post">
     <div class="mb-3">
     <label for="date" class="form-label">Public date</label>

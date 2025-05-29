@@ -31,7 +31,7 @@ abstract class ActiveRecordEntity
     public static function getById(int $id)
     {
         $db = Db::getInstance();//connect
-        $sql = 'SELECT * FROM `'.static::getTableName().'` WHERE `id` = 1';
+        $sql = 'SELECT * FROM '.static::getTableName().' WHERE id = :id';
         $entities = $db->query($sql, [':id'=>$id], static::class);
         return $entities ? $entities[0] : null;
     }
@@ -92,6 +92,14 @@ abstract class ActiveRecordEntity
         $sql = 'DELETE FROM `'.$tablename.'` WHERE `id`=:id';
         $db->query($sql, [':id'=>$id], static::class);
     }
+
+
+    public static function getByFildName(string $fieldName, int $id): ?array{
+        $db = Db::getInstance();
+        $sql = 'SELECT * FROM`'.static::getTableName().'` WHERE `'.$fieldName.'`=:'.$fieldName;
+        return $db->query($sql, [':'.$fieldName=>$id], static::class);
+    }
+
 
     protected abstract static function getTableName();
 }
