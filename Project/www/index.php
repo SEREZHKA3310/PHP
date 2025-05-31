@@ -18,5 +18,3 @@ spl_autoload_register(function(string $className){
     }
 
     if (!$findRoute) echo 'Страница не найдена';
-
-
